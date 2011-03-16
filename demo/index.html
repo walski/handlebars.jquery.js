@@ -13,7 +13,9 @@
   <div>
     <h2 class="display" id="headline">-~-/ {{headline}} {{headlineCount}} \-~-</h2>
     
-    <div class="display" id="body" data-template="{{{body}}}"></div>
+    <p class="hasNoTemplateInMarkup" id="teaser"></p>
+    
+    <p class="display" id="body" data-template="{{{body}}}"></p>
     
     <p>
       <a href="#">Next Headline</a>
@@ -24,12 +26,15 @@
     var model = $({}).data({
       headline: "Headline",
       headlineCount: 1,
+      teaser: 'What a wonderful dayyy!',
       body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
     });
     
     $(document).ready(function() {
-      // Bind the template to the element here and let it render the model
+      // Bind the template to the elements that have a template set in the HTML markup here and let it render the model
       $('.display').template(model);
+      // Bind the template to the teaser which has no template set in the HTML markup, and so we set in in the JS code
+      $('.hasNoTemplateInMarkup').template(model, '{{teaser}}');
       
       $('a').click(function(e) {
         e.preventDefault();

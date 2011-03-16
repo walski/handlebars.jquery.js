@@ -17,6 +17,11 @@ describe("handlebars.jquery.js", function() {
     div1.template();
     expect(div1.text()).toEqual("Hello Corey");
   });
+
+  it("uses a given template string when present", function() {
+    div1.template(false, 'Hello Attribute World!');
+    expect(div1.text()).toEqual("Hello Attribute World!");
+  });
   
   describe("giving a model explicitly", function() {
     var model;
