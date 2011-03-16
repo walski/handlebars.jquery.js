@@ -16,24 +16,29 @@
 
 Just include jQuery, Handlebars and handlebars.jquery.js in your HTML Head:
 
-  &lt;!DOCTYPE html&gt;
-  &lt;html&gt;
-  &lt;head&gt;
-    &lt;script src=&quot;jquery-1.5.1.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;handlebars-0.9.0.pre.4.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
-    &lt;script src=&quot;handlebars.jquery.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+<pre>
+  &lt;!DOCTYPE html>
+
+  &lt;html>
+  &lt;head>
+    &lt;script src="jquery-1.5.1.min.js" charset="utf-8">&lt;/script>
+    &lt;script src="handlebars-0.9.0.pre.4.js" charset="utf-8">&lt;/script>
+    &lt;script src="handlebars.jquery.js" charset="utf-8">&lt;/script>
   ...
+</pre>
 
 ## Usage Examples
 
 Simple example:
 
+<pre>
   ...
-  &lt;h1 data-title=&quot;It&#x27;s a headline!&quot;&gt;{{title}}&lt;/h1&gt;
+  &lt;h1 data-title="It's a headline!">{{title}}&lt;/h1>
   ...
-  &lt;script style=&quot;text/javascript&quot;&gt;
-    $(&#x27;h1&#x27;).template();
-  &lt;/script&gt;
+  &lt;script style="text/javascript">
+    $('h1').template();
+  &lt;/script>
   ...
+</pre>
 
 See the *demo* folder for more examples.
