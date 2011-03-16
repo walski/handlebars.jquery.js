@@ -16,13 +16,12 @@
 
 Just include jQuery, Handlebars and handlebars.jquery.js in your HTML Head:
 
-  <!DOCTYPE html>
-
-  <html>
-  <head>
-    <script src="jquery-1.5.1.min.js" charset="utf-8"></script>
-    <script src="handlebars-0.9.0.pre.4.js" charset="utf-8"></script>
-    <script src="handlebars.jquery.js" charset="utf-8"></script>
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;head&gt;
+    &lt;script src=&quot;jquery-1.5.1.min.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;handlebars-0.9.0.pre.4.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
+    &lt;script src=&quot;handlebars.jquery.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;
   ...
 
 ## Usage Examples
@@ -30,11 +29,11 @@ Just include jQuery, Handlebars and handlebars.jquery.js in your HTML Head:
 Simple example:
 
   ...
-  <h1 data-title="It's a headline!">{{title}}</h1>
+  &lt;h1 data-title=&quot;It&#x27;s a headline!&quot;&gt;{{title}}&lt;/h1&gt;
   ...
-  <script style="text/javascript">
-    $('h1').template();
-  </script>
+  &lt;script style=&quot;text/javascript&quot;&gt;
+    $(&#x27;h1&#x27;).template();
+  &lt;/script&gt;
   ...
 
 See the *demo* folder for more examples.
