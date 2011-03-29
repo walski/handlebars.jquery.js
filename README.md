@@ -11,6 +11,7 @@
   * write your Handlebars template just inside the DOM element
   * bind a model to the template
   * supports any kind of model that is compatible to jQuery's data() API
+  * can render simple collections in combination with [collection.jquery.js](https://github.com/walski/collection.jquery.js) or compatible collections
 
 ## Installation
 
@@ -29,7 +30,7 @@ Just include jQuery, Handlebars and handlebars.jquery.js in your HTML Head:
 
 ## Usage Examples
 
-Simple example:
+### Simple example
 
 <pre>
   ...
@@ -40,5 +41,34 @@ Simple example:
   &lt;/script>
   ...
 </pre>
+
+### Collections
+<pre>
+  ...
+  &lt;ul>
+    &lt;li>Some Fruit: {{name}}&lt;/li>
+  &lt;/ul>
+  ...
+  &lt;script style="text/javascript">
+    var banana = $({});
+    banana.data('name', 'Banana');
+    var apple = $({}); 
+    apple.data('name', 'Green Apple');
+    
+    var fruits = $.collection(banana, apple);
+    $('ul').template();
+  &lt;/script>
+  ...
+</pre>
+
+results in:
+
+<pre>
+  &lt;ul>
+    &lt;li>Some Fruit: Banana&lt;/li>
+    &lt;li>Some Fruit: Green Apple&lt;/li>
+  &lt;/ul>
+</pre>
+
 
 See the *demo* folder for more examples.
