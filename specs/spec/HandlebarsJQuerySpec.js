@@ -66,8 +66,103 @@ describe("handlebars.jquery.js", function() {
     var model = $({}).data({name: 'Bob', surname: 'Bonk'});
 
     container.find('*').template(model);
+
     expect(div1.text()).toEqual('Bob');
     expect(div2.text()).toEqual('Bonk');
   });
   
+  it('returns the existing template object when calling template() on a DOM element with existing template', function() {
+    var model = $({});
+    var templateObject = div1.template(model, 'Hello Attribute World!');
+    expect(templateObject.jQueryModel).toBe(model);
+    expect(div1.template()).toBe(templateObject);
+  });
+  
+  describe('collections', function() {
+    var peter;
+    var paul;
+    var mary;
+    var people;
+    
+    var ul;
+    
+    beforeEach(function() {
+      peter = $({});
+      peter.data({name: 'Peter'});
+      
+      paul = $({});
+      paul.data({name: 'Paul'});
+      
+      mary = $({});
+      mary.data({name: 'Mary'});
+      
+      people = $.collection(peter, paul);
+      
+      ul = $('<ul/>');
+      ul.template(people, "<li>It's: {{name}}</li>");
+    });
+    
+    it('renders a collection', function() {
+      var lis = ul.find('li');
+      expect(lis.length).toBe(2);
+      expect($(lis[0]).text()).toEqual("It's: Peter");
+      expect($(lis[1]).text()).toEqual("It's: Paul");
+    });
+    
+    it('re-renders when the collection gets changed', function() {
+      people.push(mary);
+      var lis = ul.find('li');
+      expect(lis.length).toBe(3);
+      expect($(lis[2]).text()).toEqual("It's: Mary");
+      
+      people.pop();
+      lis = ul.find('li');
+      expect(lis.length).toBe(2);
+      expect($(lis[1]).text()).toEqual("It's: Paul");
+      
+      people.splice(0,1);
+      lis = ul.find('li');
+      expect(lis.length).toBe(1);
+      expect($(lis[0]).text()).toEqual("It's: Paul");
+    });
+    
+    it('re-renders when the collection gets sorted', function() {
+      var arnold = $({});
+      arnold.data('name', 'Arnold');
+      
+      people.push(arnold);
+      people.push(mary);
+      
+      var lis = ul.find('li');
+      expect(lis.length).toBe(4);
+      expect($(lis[0]).text()).toEqual("It's: Peter");
+      expect($(lis[1]).text()).toEqual("It's: Paul");
+      expect($(lis[2]).text()).toEqual("It's: Arnold");
+      expect($(lis[3]).text()).toEqual("It's: Mary");
+      
+      people.sort(function(a, b) {
+        if (a.data('name') > b.data('name')) {
+          return 1;
+        }
+        
+        return a.data('name') < b.data('name') ? -1 : 1;
+      });
+      
+      lis = ul.find('li');
+      expect(lis.length).toBe(4);
+      expect($(lis[0]).text()).toEqual("It's: Arnold");
+      expect($(lis[1]).text()).toEqual("It's: Mary");
+      expect($(lis[2]).text()).toEqual("It's: Paul");
+      expect($(lis[3]).text()).toEqual("It's: Peter");
+    });
+    
+    it('updates the dom element when an element in the collection', function() {
+      paul.data('name', 'new name');
+      
+      var lis = ul.find('li');
+      expect(lis.length).toBe(2);
+      expect($(lis[0]).text()).toEqual("It's: Peter");
+      expect($(lis[1]).text()).toEqual("It's: new name");
+    });
+  });
 });
