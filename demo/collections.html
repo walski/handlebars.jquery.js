@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <script src="../specs/lib/jquery-1.5.1.min.js" charset="utf-8"></script>
+  <script src="../specs/lib/collection.jquery.js" charset="utf-8"></script>
+  <script src="../handlebars-0.9.0.pre.4.js" charset="utf-8"></script>
+  <script src="../handlebars.jquery.js" charset="utf-8"></script>
+  
+  <link rel="stylesheet" href="stylesheets/application.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+
+<body>
+  <div>
+    <h2>Participants:</h2>
+    <ul id="participants">
+      <li>Name: <strong>{{name}}</strong> <a href="#" class="delete">x</a></li>
+    </ul>
+  </div>
+
+  <div>
+    <a href="#" id="addParticipant">Add Participant</a>
+  </div>
+  
+  <script type="text/javascript">
+    var participants = $.collection();
+    
+    $(document).ready(function() {
+      // Bind the collection to the ul
+      $('#participants').template(participants);
+      
+      $('a#addParticipant').click(function(e) {
+        e.preventDefault();
+        var participant = $({});
+        participant.data({name: prompt("Name:")});
+        participants.push(participant);
+      });
+      
+      $('#participants a.delete').live('click', function(e) {
+        e.preventDefault();
+        participants.remove($(this).parents('li').template().jQueryModel);
+      });
+    });
+  </script>
+</body>
+</html>
